@@ -3,6 +3,12 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Symfony\Component\HttpKernel\Exception\UnsupportedMediaTypeHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -41,8 +47,46 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+        $this->renderable(
+            fn(UnsupportedMediaTypeHttpException $e) => throw new JsonAPI\UnsupportedMediaTypeHttpException(
+                $e->getMessage(),
+                $this->isHttpException($e) ? $e->getStatusCode() : 415
+            )
+        );
+
+        $this->renderable(
+            fn(BadRequestHttpException $e) => throw new JsonAPI\BadRequestHttpException(
+                $e->getMessage(),
+                $this->isHttpException($e) ? $e->getStatusCode() : 400
+            )
+        );
+
+        $this->renderable(
+            fn(UnauthorizedHttpException $e) => throw new JsonAPI\UnauthorizedHttpException(
+                $e->getMessage(),
+                $this->isHttpException($e) ? $e->getStatusCode() : 401
+            )
+        );
+
+        $this->renderable(
+            fn(AccessDeniedHttpException $e) => throw new JsonAPI\AccessDeniedHttpException(
+                $e->getMessage(),
+                $this->isHttpException($e) ? $e->getStatusCode() : 403
+            )
+        );
+
+        $this->renderable(
+            fn(NotFoundHttpException $e) => throw new JsonAPI\NotFoundHttpException(
+                $e->getMessage(),
+                $this->isHttpException($e) ? $e->getStatusCode() : 404
+            )
+        );
+
+        $this->renderable(
+            fn(MethodNotAllowedHttpException $e) => throw new JsonAPI\MethodNotAllowedHttpException(
+                $e->getMessage(),
+                $this->isHttpException($e) ? $e->getStatusCode() : 405
+            )
+        );
     }
 }
