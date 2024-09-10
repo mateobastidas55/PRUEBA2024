@@ -70,7 +70,7 @@ jobs:
             then
                 cd webhook-interrapidisimo
                 git config --global --add safe.directory /var/www/clients/client1/web1/web/webhook-interrapidisimo
-                git pull origin master
+                git pull origin main
             else
                 git clone  git@github.com:Development-Aveonline/webhook-interrapidisimo.git
                 cd webhook-interrapidisimo
