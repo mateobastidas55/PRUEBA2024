@@ -48,42 +48,42 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->renderable(
-            fn(UnsupportedMediaTypeHttpException $e) => throw new JsonAPI\UnsupportedMediaTypeHttpException(
+            fn(UnsupportedMediaTypeHttpException $e) => throw new JsonApi\UnsupportedMediaTypeHttpException(
                 $e->getMessage(),
                 $this->isHttpException($e) ? $e->getStatusCode() : 415
             )
         );
 
         $this->renderable(
-            fn(BadRequestHttpException $e) => throw new JsonAPI\BadRequestHttpException(
+            fn(BadRequestHttpException $e) => throw new JsonApi\BadRequestHttpException(
                 $e->getMessage(),
                 $this->isHttpException($e) ? $e->getStatusCode() : 400
             )
         );
 
         $this->renderable(
-            fn(UnauthorizedHttpException $e) => throw new JsonAPI\UnauthorizedHttpException(
+            fn(UnauthorizedHttpException $e) => throw new JsonApi\UnauthorizedHttpException(
                 $e->getMessage(),
                 $this->isHttpException($e) ? $e->getStatusCode() : 401
             )
         );
 
         $this->renderable(
-            fn(AccessDeniedHttpException $e) => throw new JsonAPI\AccessDeniedHttpException(
+            fn(AccessDeniedHttpException $e) => throw new JsonApi\AccessDeniedHttpException(
                 $e->getMessage(),
                 $this->isHttpException($e) ? $e->getStatusCode() : 403
             )
         );
 
         $this->renderable(
-            fn(NotFoundHttpException $e) => throw new JsonAPI\NotFoundHttpException(
+            fn(NotFoundHttpException $e) => throw new JsonApi\NotFoundHttpException(
                 $e->getMessage(),
                 $this->isHttpException($e) ? $e->getStatusCode() : 404
             )
         );
 
         $this->renderable(
-            fn(MethodNotAllowedHttpException $e) => throw new JsonAPI\MethodNotAllowedHttpException(
+            fn(MethodNotAllowedHttpException $e) => throw new JsonApi\MethodNotAllowedHttpException(
                 $e->getMessage(),
                 $this->isHttpException($e) ? $e->getStatusCode() : 405
             )
