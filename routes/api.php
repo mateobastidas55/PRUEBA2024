@@ -24,18 +24,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('create-user', [UsersController::class, 'store'])->name('create.user');
 
-Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('refresh', [AuthController::class, 'refresh'])->name('refresh');
     Route::post('me', [AuthController::class, 'me'])->name('me');
 });
 
-Route::group(['middleware' => 'webhook.middle', 'prefix' => 'v1'], function () {});
+// Route::group(['middleware' => 'webhook.middle', 'prefix' => 'v1'], function () {});
 
 
 
-Route::middleware(['auth:api', 'throttle:6,1'])->group(function () {
+Route::middleware(['throttle:6,1'])->group(function () {
     Route::get('/email/verify', function (Request $request) {
         return response()->json(['message' => 'Verify your email address by clicking the link sent to your email.']);
     })->name('verification.notice');
