@@ -82,11 +82,11 @@ class Handler extends ExceptionHandler
             )
         );
 
-        $this->renderable(
-            fn(MethodNotAllowedHttpException $e) => throw new JsonApi\MethodNotAllowedHttpException(
-                $e->getMessage(),
-                $this->isHttpException($e) ? $e->getStatusCode() : 405
-            )
-        );
+        // $this->renderable(
+        //     fn(MethodNotAllowedHttpException $e) => throw new JsonApi\MethodNotAllowedHttpException(
+        //         $e->getMessage(),
+        //         $this->isHttpException($e) ? $e->getStatusCode() : 405
+        //     )
+        // );
     }
 }
