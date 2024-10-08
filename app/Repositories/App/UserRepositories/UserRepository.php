@@ -15,6 +15,7 @@ class UserRepository implements UserInterface
 
     public function store(array $request): array
     {
+        dd($request);
         $fillable = [
             'name' => $request['name'],
             'email' => $request['email'],

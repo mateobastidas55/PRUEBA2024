@@ -13,10 +13,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('name')->comment('campo que almacena el nombre del usuario');
+            $table->string('lastname')->comment('campo que almacena el apellido del usuario');
+            $table->string('email')->unique()->comment('campo que almacena el correo del usuario');
+            $table->date('birt_day')->commment('campo que almacena la fecha de cumpleaños del usuario');
             $table->timestamp('email_verified_at')->nullable();
+            $table->unsignedBigInteger('id_notification_method_favorite');
+            $table->foreign('id_notification_method_favorite')->references('id')->on('notification_methods');
             $table->string('password');
+            $table->unsignedBigInteger('id_rol');
+            $table->foreign('id_rol')->references('id')->on('rol');
             $table->rememberToken();
             $table->timestamps();
         });

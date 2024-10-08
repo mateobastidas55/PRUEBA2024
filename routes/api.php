@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('create-user', [UsersController::class, 'store'])->name('create.user')->middleware('internal.user.ave');
+Route::post('create-user', [UsersController::class, 'store'])->name('create.user');
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
