@@ -10,6 +10,8 @@ use Illuminate\Http\Response;
 
 
 use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
+use App\OpenApi\Responses\Notifications\NotificationMethodResponse;
+use App\OpenApi\SecuritySchemes\auth\loginSecurityScheme;
 
 #[OpenApi\PathItem]
 class NotificationMethodsController extends Controller
@@ -20,8 +22,10 @@ class NotificationMethodsController extends Controller
         $this->notificationMethodsInterface = $notificationMethodsInterface;
     }
     /**
-     * Display a listing of the resource.
+     * Endpoint que muestra los metodos de notificacion
      */
+    #[OpenApi\Operation(id: 'IndexNotificationMethodResponse', tags: ['apiResource'], security: loginSecurityScheme::class)]
+    #[OpenApi\Response(factory: NotificationMethodResponse::class, statusCode: Response::HTTP_CREATED)]
     public function index()
     {
         try {
