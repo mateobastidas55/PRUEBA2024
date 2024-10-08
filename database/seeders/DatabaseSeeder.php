@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         NotificationMethods::factory(3)->create();
-        Rol::factory(2)->create();
+        Rol::factory(3)->create();
         User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

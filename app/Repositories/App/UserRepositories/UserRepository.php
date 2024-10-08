@@ -2,8 +2,10 @@
 
 namespace App\Repositories\App\UserRepositories;
 
+use App\Models\NotificationMethods;
 use App\Models\User;
 use App\Repositories\Interfaces\UserInterfaces\UserInterface;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserInterface
@@ -15,9 +17,14 @@ class UserRepository implements UserInterface
 
     public function store(array $request): array
     {
-        dd($request);
+        $idMethodNotification = new NotificationMethods();
+        // dd($request);
         $fillable = [
             'name' => $request['name'],
+            'lastname' => $request['lastname'],
+            'birt_day' => Carbon::createFromFormat('d/m/Y', $request['birthday'])->format('Y-m-d'),
+            'id_notification_method_favorite' => $idMethodNotification::where('notification_method_name', $request['notification'])->first()->id,
+            'id_rol' => 1,
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ];

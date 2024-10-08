@@ -23,8 +23,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('create-user', [UsersController::class, 'store'])->name('create.user');
 
+Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
-    Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('refresh', [AuthController::class, 'refresh'])->name('refresh');
     Route::post('me', [AuthController::class, 'me'])->name('me');

@@ -37,37 +37,15 @@ class AuthController extends Controller
     public function login()
     {
         try {
-            // Obtener el encabezado Authorization
-            $authorizationHeader = request()->header('Authorization');
-
-            // Verificar si el encabezado Authorization comienza con "Basic "
-            if (strpos($authorizationHeader, 'Basic ') === 0) {
-                // Obtener la parte codificada en base64
-                $base64Credentials = substr($authorizationHeader, 6);
-
-                // Decodificar las credenciales en base64
-                $decodedCredentials = base64_decode($base64Credentials);
-
-                // Separar usuario y contraseña
-                list($email, $password) = explode(':', $decodedCredentials, 2);
-
-                // Intentar autenticar al usuario con las credenciales decodificadas
-                $credentials = ['email' => $email, 'password' => $password];
-
-                if (!$token = auth()->attempt($credentials)) {
-                    return response()->json(['error' => 'Unauthorized'], 401);
-                }
-
-                // Retornar el token JWT si la autenticación es exitosa
-                return response()->json([
-                    'access_token' => $token,
-                    'token_type' => 'Bearer',
-                    'expires_in' => auth()->factory()->getTTL() * 60
-                ]);
+            $credentials = request(['email', 'password']);
+            if (! $token = auth()->attempt($credentials)) {
+                return response()->json(['error' => 'Unauthorized'], 401);
             }
-
-            // Si no se proporciona el encabezado Authorization o no está bien formado
-            return response()->json(['error' => 'Invalid Authorization Header'], 400);
+            return response()->json([
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+                'expires_in' => auth()->factory()->getTTL() * 60
+            ]);
         } catch (\Throwable $e) {
             return response()->json(
                 [

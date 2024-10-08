@@ -58,6 +58,15 @@ class UsersController extends Controller
                     'message' => 'El correo electrónico ya está registrado.'
                 ], Response::HTTP_BAD_REQUEST);
             }
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $e->getMessage(),
+                    'file' => $e->getFile(),
+                    'line' => $e->getLine()
+                ],
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
         } catch (\Throwable $e) {
             return response()->json(
                 [
