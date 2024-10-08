@@ -24,7 +24,7 @@ class NotificationMethodsController extends Controller
     /**
      * Endpoint que muestra los metodos de notificacion
      */
-    #[OpenApi\Operation(id: 'IndexNotificationMethodResponse', tags: ['apiResource'], security: loginSecurityScheme::class)]
+    #[OpenApi\Operation(id: 'IndexNotificationMethodResponse', tags: ['usuarios'], security: loginSecurityScheme::class)]
     #[OpenApi\Response(factory: NotificationMethodResponse::class, statusCode: Response::HTTP_CREATED)]
     public function index()
     {

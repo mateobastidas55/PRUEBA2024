@@ -32,7 +32,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    #[OpenApi\Operation(id: 'LoginUserRequest', tags: ['apiResource'])]
+    #[OpenApi\Operation(id: 'LoginUserRequest', tags: ['usuarios'])]
     #[OpenApi\RequestBody(factory: LoginRequestBody::class)]
     #[OpenApi\Response(factory: LoginResponse::class, statusCode: Response::HTTP_OK)]
     #[OpenApi\Parameters(factory: LoginParameters::class)]
@@ -66,7 +66,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    #[OpenApi\Operation(id: 'MeUserRequest', tags: ['apiResource'], security: TokenAveSecuritySecurityScheme::class)]
+    #[OpenApi\Operation(id: 'MeUserRequest', tags: ['usuarios'], security: TokenAveSecuritySecurityScheme::class)]
     #[OpenApi\Response(factory: ResponseMeResponse::class, statusCode: Response::HTTP_OK)]
     public function me()
     {
@@ -90,7 +90,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    #[OpenApi\Operation(id: 'LogoutUserRequest', tags: ['apiResource'], security: TokenAveSecuritySecurityScheme::class)]
+    #[OpenApi\Operation(id: 'LogoutUserRequest', tags: ['usuarios'], security: TokenAveSecuritySecurityScheme::class)]
     #[OpenApi\Response(factory: ResponseLogoutResponse::class, statusCode: Response::HTTP_OK)]
     public function logout()
     {
@@ -121,7 +121,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    #[OpenApi\Operation(id: 'RefreshUserRequest', tags: ['apiResource'])]
+    #[OpenApi\Operation(id: 'RefreshUserRequest', tags: ['usuarios'])]
     #[OpenApi\Response(factory: LoginResponse::class, statusCode: Response::HTTP_OK)]
     #[OpenApi\Parameters(factory: LoginParameters::class)]
     public function refresh()

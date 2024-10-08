@@ -44,7 +44,7 @@ class UsersController extends Controller
      *
      * Creates new user or returns already existing user by email.
      */
-    // #[OpenApi\Operation(id: 'StoreUserRequest', tags: ['apiResource'], security: loginSecurityScheme::class)]
+    #[OpenApi\Operation(id: 'StoreUserRequest', tags: ['usuarios'], security: loginSecurityScheme::class)]
     #[OpenApi\RequestBody(factory: StoreUserRequestBody::class)]
     #[OpenApi\Response(factory: ResponseStoreUserResponse::class, statusCode: Response::HTTP_CREATED)]
     public function store(Request $request)
