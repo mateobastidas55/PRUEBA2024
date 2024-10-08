@@ -4,6 +4,7 @@ namespace App\Http\Controllers\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\OpenApi\Parameters\user\LoginParameters;
+use App\OpenApi\RequestBodies\user\LoginRequestBody;
 use App\OpenApi\Responses\user\LoginResponse;
 use Illuminate\Http\Response;
 
@@ -32,6 +33,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     #[OpenApi\Operation(id: 'LoginUserRequest', tags: ['apiResource'])]
+    #[OpenApi\RequestBody(factory: LoginRequestBody::class)]
     #[OpenApi\Response(factory: LoginResponse::class, statusCode: Response::HTTP_OK)]
     #[OpenApi\Parameters(factory: LoginParameters::class)]
     public function login()
