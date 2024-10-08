@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\V1\Auth\AuthController;
+use App\Http\Controllers\V1\Lotteries\LotteryController;
 use App\Http\Controllers\V1\Notification\NotificationMethodsController;
 use App\Http\Controllers\V1\Users\UsersController;
 use App\Http\Controllers\V1\WebHooks\Interrapidisimo\InterrapidisimoController;
@@ -40,6 +41,11 @@ Route::group(['middleware' => 'loteria.middle', 'prefix' => 'v1'], function () {
      * metodos de notificacion
      */
     Route::apiResource('methods-notifications', NotificationMethodsController::class);
+
+    /**
+     * todas las loterias
+     */
+    Route::apiResource('lotteries', LotteryController::class);
 });
 
 

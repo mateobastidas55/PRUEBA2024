@@ -198,6 +198,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\UsersRepositoryProvider::class,
         App\Providers\NotificationMethodsProvider::class,
+        App\Providers\LotteryProvider::class,
 
 
     ],
