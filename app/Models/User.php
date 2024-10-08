@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject, MustVerifyEmail
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -80,8 +80,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     }
 
 
-    public function sendEmailVerificationNotification()
-    {
-        $this->notify(new VerifyEmailNotification);
-    }
+    // public function sendEmailVerificationNotification()
+    // {
+    //     $this->notify(new VerifyEmailNotification);
+    // }
 }

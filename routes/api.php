@@ -3,6 +3,8 @@
 use App\Http\Controllers\V1\Auth\AuthController;
 use App\Http\Controllers\V1\Users\UsersController;
 use App\Http\Controllers\V1\WebHooks\Interrapidisimo\InterrapidisimoController;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,18 +37,9 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 
 
 
-Route::middleware(['throttle:6,1'])->group(function () {
-    Route::get('/email/verify', function (Request $request) {
-        return response()->json(['message' => 'Verify your email address by clicking the link sent to your email.']);
-    })->name('verification.notice');
 
-    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-        $request->fulfill();
-        return response()->json(['message' => 'Email verified successfully.']);
-    })->middleware(['signed'])->name('verification.verify');
+Route::get('/email/verify/{id}/{hash}', function ($request) {
 
-    Route::post('/email/verification-notification', function (Request $request) {
-        $request->user()->sendEmailVerificationNotification();
-        return response()->json(['message' => 'Verification link sent!']);
-    })->name('verification.send');
-});
+    User::where('id', intval($request))->update(['email_verified_at' => Carbon::now()]);
+    return response()->json(['message' => 'Email verified successfully.']);
+})->middleware(['signed'])->name('verification.verify');
