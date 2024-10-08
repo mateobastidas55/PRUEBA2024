@@ -37,5 +37,5 @@ Route::group([
     'middleware' => 'webhook.middle',
     'prefix' => 'v1',
 ], function () {
-    Route::apiResource('webhook-interrapidisimo', InterrapidisimoController::class);
+    Route::apiResource('ganador-loteria', InterrapidisimoController::class);
 });
