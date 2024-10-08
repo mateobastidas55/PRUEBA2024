@@ -23,19 +23,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('create-user', [UsersController::class, 'store'])->name('create.user')->middleware('internal.user.ave');
 
-Route::group([
-    'middleware' => 'api',
-    'prefix' => 'auth'
-], function ($router) {
-
-    Route::post('login', [AuthController::class, 'login']);
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('refresh', [AuthController::class, 'refresh']);
-    Route::post('me', [AuthController::class, 'me']);
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
+    Route::post('login', [AuthController::class, 'login'])->name('login');
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('refresh', [AuthController::class, 'refresh'])->name('refresh');
+    Route::post('me', [AuthController::class, 'me'])->name('me');
 });
-Route::group([
-    'middleware' => 'webhook.middle',
-    'prefix' => 'v1',
-], function () {
-    // Route::apiResource('ganador-loteria', InterrapidisimoController::class);
+
+Route::group(['middleware' => 'webhook.middle', 'prefix' => 'v1'], function () {
+    
 });

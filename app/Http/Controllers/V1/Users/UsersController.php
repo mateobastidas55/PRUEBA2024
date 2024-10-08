@@ -3,11 +3,18 @@
 namespace App\Http\Controllers\V1\Users;
 
 use App\Http\Controllers\Controller;
+use App\OpenApi\RequestBodies\user\StoreUserRequestBody;
+use App\OpenApi\Responses\user\ResponseStoreUserResponse;
+use App\OpenApi\SecuritySchemes\auth\loginSecurityScheme;
 use App\Repositories\Interfaces\UserInterfaces\UserInterface;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
+
+
+#[OpenApi\PathItem]
 class UsersController extends Controller
 {
 
@@ -23,13 +30,23 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(
+            [
+                'success' => false,
+                'messague' => 'Not Found.'
+            ],
+            Response::HTTP_NOT_FOUND
+        );
     }
 
     /**
-     * Store a newly created resource in storage.
-     * 
+     * Create new user.
+     *
+     * Creates new user or returns already existing user by email.
      */
+    #[OpenApi\Operation(id: 'StoreUserRequest', tags: ['apiResource'], security: loginSecurityScheme::class)]
+    #[OpenApi\RequestBody(factory: StoreUserRequestBody::class)]
+    #[OpenApi\Response(factory: ResponseStoreUserResponse::class, statusCode: Response::HTTP_CREATED)]
     public function store(Request $request)
     {
         try {
@@ -59,7 +76,13 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return response()->json(
+            [
+                'success' => false,
+                'messague' => 'Not Found.'
+            ],
+            Response::HTTP_NOT_FOUND
+        );
     }
 
     /**
@@ -67,7 +90,13 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return response()->json(
+            [
+                'success' => false,
+                'messague' => 'Not Found.'
+            ],
+            Response::HTTP_NOT_FOUND
+        );
     }
 
     /**
@@ -75,6 +104,12 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return response()->json(
+            [
+                'success' => false,
+                'messague' => 'Not Found.'
+            ],
+            Response::HTTP_NOT_FOUND
+        );
     }
 }
