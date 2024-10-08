@@ -30,6 +30,8 @@ class UserRepository implements UserInterface
         ];
         $user = User::create($fillable);
 
+        $user->sendEmailVerificationNotification();
+
         $credentials = [
             'email'    => $request['email'],
             'password' => $request['password']
