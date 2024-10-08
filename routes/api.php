@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\V1\Auth\AuthController;
+use App\Http\Controllers\V1\Notification\NotificationMethodsController;
 use App\Http\Controllers\V1\Users\UsersController;
 use App\Http\Controllers\V1\WebHooks\Interrapidisimo\InterrapidisimoController;
 use App\Models\User;
@@ -27,13 +28,19 @@ use Illuminate\Support\Facades\Route;
 Route::post('create-user', [UsersController::class, 'store'])->name('create.user');
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
+
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('refresh', [AuthController::class, 'refresh'])->name('refresh');
     Route::post('me', [AuthController::class, 'me'])->name('me');
 });
 
-// Route::group(['middleware' => 'webhook.middle', 'prefix' => 'v1'], function () {});
+Route::group(['middleware' => 'loteria.middle', 'prefix' => 'v1'], function () {
+    /**
+     * metodos de notificacion
+     */
+    Route::apiResource('methods-notifications', NotificationMethodsController::class);
+});
 
 
 

@@ -22,7 +22,7 @@ class NotificationMethodsFactory extends Factory
             'whatsapp'
         ];
         return [
-            'notification_method_name' => fake()->randomElement($methods),
+            'notification_method_name' => 'email',
         ];
     }
 }

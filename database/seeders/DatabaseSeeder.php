@@ -18,14 +18,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        NotificationMethods::factory(3)->create();
+        NotificationMethods::factory(1)->create();
         Rol::factory(3)->create();
         User::factory()->create(
             [
                 'name' => 'Cristian',
                 'lastname' => 'Aguirre',
                 'birt_day' => fake()->dateTime(),
-                'id_notification_method_favorite' => fake()->numberBetween(1, 3),
+                'id_notification_method_favorite' => 1,
                 'id_rol' => 2,
                 'email' => 'dextter1913@gmail.com',
                 'password' => 'Clau32290398*',
@@ -120,7 +120,7 @@ class DatabaseSeeder extends Seeder
             $ids[] = $idUser['id'];
         }
         foreach ($res as $idLotery) {
-            GamesLottery::factory()->count(99)->create([
+            GamesLottery::factory()->count(10)->create([
                 'id_lottery' =>  $idLotery['id'],
                 'game_date' => fake()->dateTimeBetween('now', '+1 month')->format('Y-m-d'),
                 'reward' => fake()->numberBetween(1000000000, 99000000000),

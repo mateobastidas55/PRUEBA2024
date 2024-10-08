@@ -13,5 +13,7 @@ class NotificationMethods extends Model
         'notification_method_name',
     ];
 
+    protected $timestamp = false;
+
     protected $table = 'notification_methods';
 }
