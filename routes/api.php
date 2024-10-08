@@ -34,19 +34,18 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 Route::group(['middleware' => 'webhook.middle', 'prefix' => 'v1'], function () {});
 
 
-
-Route::middleware(['auth:api', 'throttle:6,1'])->group(function () {
+Route::middleware(['throttle:6,1'])->group(function () {
     Route::get('/email/verify', function (Request $request) {
-        return response()->json(['message' => 'Confirma tu correo electrónico haciendo clic en el enlace que te hemos enviado.']);
+        return response()->json(['message' => 'Verify your email address by clicking the link sent to your email.']);
     })->name('verification.notice');
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
-        return response()->json(['message' => 'Correo electrónico verificado con éxito.']);
+        return response()->json(['message' => 'Email verified successfully.']);
     })->middleware(['signed'])->name('verification.verify');
 
     Route::post('/email/verification-notification', function (Request $request) {
         $request->user()->sendEmailVerificationNotification();
-        return response()->json(['message' => '¡Enlace de verificación enviado!']);
+        return response()->json(['message' => 'Verification link sent!']);
     })->name('verification.send');
 });
