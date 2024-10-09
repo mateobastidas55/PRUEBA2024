@@ -14,16 +14,19 @@ class LotteryResponse extends ResponseFactory
         return Response::ok()->description('Successful response')
             ->content(
                 MediaType::json()->schema(
-                    Schema::object('LotteryResponse')
-                        ->properties(
-                            Schema::number('id')->example(1)->description('Identificador único del registro de la lotería. Puede ser null al momento de la creación.'),
-                            Schema::string('lotteryName')->example('Lotería de Cundinamarca')->description('Nombre de la lotería. Este campo describe la denominación oficial de la lotería.'),
-                            Schema::string('description')->example('Una de las loterías más antiguas y tradicionales del país.')->description('Descripción detallada de la lotería. Proporciona información sobre la historia y características de la lotería.'),
-                            Schema::boolean('status')->example(1)->description('Estado de la lotería, donde 1 indica que está activa. Este campo puede ser utilizado para determinar si la lotería está en funcionamiento.'),
-                            Schema::string('gameRules')->example('Juega con las tres últimas cifras en su orden correcta.')->description('Reglas del juego de la lotería. Explica cómo se puede participar y cuáles son los requisitos para jugar.'),
-                            Schema::string('price')->example('20000 COP')->description('campo que almacena el precio de la loteria'),
-                            Schema::string('created_at')->example('2024-10-09 07:52:05')->description('Fecha de creación de la Lotería'),
-                            Schema::string('updated_at')->example('2024-10-09 07:52:05')->description('Fecha de Actualización de la Lotería'),
+                    Schema::array('LotteryResponse') // Declaramos que es un array de objetos
+                        ->items( // Aquí describimos las propiedades de cada objeto del array
+                            Schema::object()
+                                ->properties(
+                                    Schema::integer('id')->example(1)->description('Identificador único del registro de la lotería.'),
+                                    Schema::string('lotteryName')->example('Lotería de Cundinamarca')->description('Nombre de la lotería.'),
+                                    Schema::string('description')->example('Una de las loterías más antiguas y tradicionales del país.')->description('Descripción detallada de la lotería.'),
+                                    Schema::boolean('status')->example(1)->description('Estado de la lotería, donde 1 indica que está activa.'),
+                                    Schema::string('gameRules')->example('Juega con las tres últimas cifras en su orden correcta.')->description('Reglas del juego de la lotería.'),
+                                    Schema::string('price')->example('86278')->description('Precio de la lotería en pesos.'),
+                                    Schema::string('created_at')->example('2024-10-09 07:52:05')->description('Fecha de creación de la lotería.'),
+                                    Schema::string('updated_at')->example('2024-10-09 07:52:05')->description('Fecha de actualización de la lotería.')
+                                )
                         )
                 )
             );
