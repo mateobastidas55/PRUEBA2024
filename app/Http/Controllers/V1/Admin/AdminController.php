@@ -10,11 +10,23 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+
+use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
+use App\OpenApi\SecuritySchemes\auth\loginSecurityScheme;
+use App\OpenApi\Responses\Admin\IndexAdminControllerResponse;
+
+#[OpenApi\PathItem]
+
+
 class AdminController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Endpoint que proporciona una lista de todos los sorteos.
+     * Devuelve información sobre cada sorteo.
      */
+
+    #[OpenApi\Operation(id: 'IndexAdminControllerResponse', tags: ['Consultar Sorteos'], security: loginSecurityScheme::class)]
+    #[OpenApi\Response(factory: IndexAdminControllerResponse::class, statusCode: Response::HTTP_CREATED)]
     public function index()
     {
         try {
