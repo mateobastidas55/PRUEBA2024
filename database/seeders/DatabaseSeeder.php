@@ -10,6 +10,7 @@ use App\Models\NotificationMethods;
 use App\Models\Rol;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,7 +29,7 @@ class DatabaseSeeder extends Seeder
                 'id_rol' => 2,
                 'email' => 'dextter1913@gmail.com',
                 'phone' => '3167777777',
-                'password' => 'Clau32290398*',
+                'password' => Hash::make('Clau32290398*'),
             ]
         );
         User::factory()->create(
@@ -39,7 +40,7 @@ class DatabaseSeeder extends Seeder
                 'id_rol' => 1,
                 'email' => 'alt.d9-elna7yd@yopmail.com',
                 'phone' => '3151511423',
-                'password' => 'password',
+                'password' => Hash::make('password'),
             ]
         );
 
