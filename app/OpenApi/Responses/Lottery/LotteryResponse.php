@@ -14,7 +14,7 @@ class LotteryResponse extends ResponseFactory
         return Response::ok()->description('Successful response')
             ->content(
                 MediaType::json()->schema(
-                    Schema::object('Login')
+                    Schema::object('LotteryResponse')
                         ->properties(
                             Schema::number('id')->example(1)->description('Identificador único del registro de la lotería. Puede ser null al momento de la creación.'),
                             Schema::string('lotteryName')->example('Lotería de Cundinamarca')->description('Nombre de la lotería. Este campo describe la denominación oficial de la lotería.'),

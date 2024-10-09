@@ -15,7 +15,7 @@ class buyLotteriesResponse extends ResponseFactory
         return Response::ok()->description('Successful response')
             ->content(
                 MediaType::json()->schema(
-                    Schema::object('Login')
+                    Schema::object('buyLotteriesResponse')
                         ->properties(
                             Schema::boolean('success')->example('true')->description('Indica si la solicitud fue exitosa.'),
                             Schema::array('lotteries')->example(["0001", "0002", "0003"])->description(' Un array que contiene los identificadores únicos de las loterías disponibles.'),

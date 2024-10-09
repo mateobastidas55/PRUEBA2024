@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V1\Lotteries;
 use App\Http\Controllers\Controller;
 use App\OpenApi\RequestBodies\buyLottery\buyLotteryRequestBody;
 use App\OpenApi\Responses\Lottery\buyLotteriesResponse;
+use App\OpenApi\Responses\Lottery\showLotteriesPorLoteResponse;
 use App\Repositories\Interfaces\LotteriesInterfaces\BuyLotteriesInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -21,12 +22,7 @@ class BuyLotteriesController extends Controller
         $this->buyLotteriesInterface = $buyLotteriesInterface;
     }
 
-    /**
-     * Endpoint que realiza la compra de la lotería
-     */
-    #[OpenApi\Operation(id: 'IndexBuyLotteriesMethodResponse', tags: ['comprarLoteria'], security: loginSecurityScheme::class)]
-    #[OpenApi\RequestBody(factory: buyLotteryRequestBody::class)]
-    #[OpenApi\Response(factory: buyLotteriesResponse::class, statusCode: Response::HTTP_CREATED)]
+    
 
     public function index()
     {
@@ -57,7 +53,13 @@ class BuyLotteriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+
+     /**
+     * Endpoint que muestra con parametro, muestra los lotes
+     */
+    #[OpenApi\Operation(id: 'showLotteriesPorLoteResponse', tags: ['comprarLoteria'], security: loginSecurityScheme::class)]
+    #[OpenApi\Response(factory: showLotteriesPorLoteResponse::class, statusCode: Response::HTTP_CREATED)]
+        public function show(int $id)
     {
         try {
             $collection = $this->buyLotteriesInterface->show($id);
@@ -74,10 +76,12 @@ class BuyLotteriesController extends Controller
             );
         }
     }
-
-    /**
-     * Update the specified resource in storage.
+     /**
+     * Endpoint que realiza la compra de la lotería
      */
+    #[OpenApi\Operation(id: 'updateBuyLotteriesMethodResponse', tags: ['comprarLoteria'], security: loginSecurityScheme::class)]
+    #[OpenApi\Response(factory: buyLotteriesResponse::class, statusCode: Response::HTTP_CREATED)]
+    #[OpenApi\RequestBody(factory: buyLotteryRequestBody::class)]
     public function update(Request $request, string $id)
     {
         try {
