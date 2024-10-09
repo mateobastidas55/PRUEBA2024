@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\WinnerMail;
 use App\Models\GamesLottery;
 use App\Models\Lottery;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class RunGameCommand extends Command
 {
@@ -36,5 +38,7 @@ class RunGameCommand extends Command
             $gamesLotteries::where('id', $winnerId['id'])->update(['winner' => true]);
         }
         echo 'congratulations to the winners';
+
+        Mail::to('dextter1914@gmail.com')->send(new WinnerMail(2222));
     }
 }
