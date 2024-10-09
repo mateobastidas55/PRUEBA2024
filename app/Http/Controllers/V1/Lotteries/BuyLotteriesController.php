@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\V1\Lotteries;
 
 use App\Http\Controllers\Controller;
+use App\OpenApi\RequestBodies\buyLottery\buyLotteryRequestBody;
 use App\OpenApi\Responses\Lottery\buyLotteriesResponse;
 use App\Repositories\Interfaces\LotteriesInterfaces\BuyLotteriesInterface;
 use Illuminate\Http\Request;
@@ -24,6 +25,7 @@ class BuyLotteriesController extends Controller
      * Endpoint que muestra la compra de la loteeria 
      */
     #[OpenApi\Operation(id: 'IndexBuyLotteriesMethodResponse', tags: ['comprarLoteria'], security: loginSecurityScheme::class)]
+    #[OpenApi\RequestBody(factory: buyLotteryRequestBody::class)]
     #[OpenApi\Response(factory: buyLotteriesResponse::class, statusCode: Response::HTTP_CREATED)]
 
     public function index()
