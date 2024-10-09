@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:validar-bodies-command')->cron('* * * * *');
+        $schedule->command('app:run-game-command')->cron('* 8 * * *');
     }
 
     /**

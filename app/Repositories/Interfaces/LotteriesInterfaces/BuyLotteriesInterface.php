@@ -17,5 +17,5 @@ interface BuyLotteriesInterface
      * @param array $request
      * @return object $response
      */
-    public function update(int $id, array $request): object;
+    public function update(int $id, array $request): array;
 }

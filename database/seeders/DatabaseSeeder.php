@@ -132,7 +132,7 @@ class DatabaseSeeder extends Seeder
             $ids[] = $idUser['id'];
         }
         foreach ($res as $idLotery) {
-            GamesLottery::factory()->count(10)->create([
+            GamesLottery::factory()->count(1000)->create([
                 'id_lottery' =>  $idLotery['id'],
                 'game_date' => fake()->dateTimeBetween('now', '+1 month')->format('Y-m-d'),
                 'reward' => fake()->numberBetween(1000000000, 99000000000),

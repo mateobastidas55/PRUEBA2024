@@ -13,7 +13,8 @@ class GamesLottery extends Model
         'id_lottery',
         'game_date',
         'reward',
-        'id_user'
+        'id_user',
+        'winner',
     ];
 
     protected $table = 'games_lottery';

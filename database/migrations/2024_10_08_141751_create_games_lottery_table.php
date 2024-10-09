@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('game_date')->comment('campo que almacena la fecha de juego');
             $table->bigInteger('reward')->comment('campo que almacena la recompensa del premio');
             $table->bigInteger('id_user')->nullable()->comment('campo que almacena el id del ganador');
+            $table->boolean('winner')->nullable()->comment('campo que almacena el numero ganador');
             $table->timestamps();
         });
     }

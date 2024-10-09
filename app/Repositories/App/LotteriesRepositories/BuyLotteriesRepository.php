@@ -41,7 +41,7 @@ class BuyLotteriesRepository implements BuyLotteriesInterface
         ];
     }
 
-    public function update(int $id, array $request): object
+    public function update(int $id, array $request): array
     {
         $gamesLottery = new GamesLottery();
         switch ($request['package']) {
@@ -66,21 +66,44 @@ class BuyLotteriesRepository implements BuyLotteriesInterface
                             'id_user' => $request['info']['id']
                         ]
                     );
-                    $res[] = $first;
+                    $res[] = str_pad($first->toArray()['id'], 4, '0', STR_PAD_LEFT);
                 }
-                dd($res);
-
                 break;
             case 'x5':
-                # code...
+                $count = [1, 2, 3, 4, 5];
+                foreach ($count as $i) {
+                    $first = $gamesLottery::where('id_lottery', $id)
+                        ->where('id_user', '=', null)
+                        ->first();
+                    $first->update(
+                        [
+                            'id_user' => $request['info']['id']
+                        ]
+                    );
+                    $res[] = str_pad($first->toArray()['id'], 4, '0', STR_PAD_LEFT);
+                }
                 break;
             case 'x10':
-                # code...
+                $count = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                foreach ($count as $i) {
+                    $first = $gamesLottery::where('id_lottery', $id)
+                        ->where('id_user', '=', null)
+                        ->first();
+                    $first->update(
+                        [
+                            'id_user' => $request['info']['id']
+                        ]
+                    );
+                    $res[] = str_pad($first->toArray()['id'], 4, '0', STR_PAD_LEFT);
+                }
                 break;
             default:
-                # code...
+                $res = [];
                 break;
         }
-        return new class {};
+        return [
+            'success' => true,
+            'lotteries' => $res
+        ];
     }
 }
