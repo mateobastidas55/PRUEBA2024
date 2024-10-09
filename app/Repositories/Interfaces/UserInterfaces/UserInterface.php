@@ -30,11 +30,10 @@ interface UserInterface
 
     /**
      * update one user
-     * @param int $id
      * @param array $request
      * @return array $response
      */
-    public function update(int $id, array $request): array;
+    public function update(array $request): array;
 
 
     /**

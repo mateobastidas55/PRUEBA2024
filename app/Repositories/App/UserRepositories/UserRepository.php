@@ -51,9 +51,17 @@ class UserRepository implements UserInterface
         return [];
     }
 
-    public function update(int $id, array $request): array
+    public function update(array $request): array
     {
-        return [];
+        $idMethodNotification = NotificationMethods::where('notification_method_name', $request['notification'])
+            ->get()
+            ->first()
+            ->toArray()['id'];
+        User::where('id', $request['info']['id'])->update(['id_notification_method_favorite' => $idMethodNotification]);
+        return [
+            'success' => true,
+            'message' => 'Successfully modified notification method.'
+        ];
     }
 
     public function destroy(int $id): array

@@ -38,6 +38,9 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'loteria.middle', 'prefix' => 'v1'], function () {
+
+    Route::put('update-notification-method', [UsersController::class, 'update'])->name('update.notification.method');
+
     /**
      * metodos de notificacion
      */

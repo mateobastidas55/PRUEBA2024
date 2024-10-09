@@ -97,15 +97,21 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        return response()->json(
-            [
-                'success' => false,
-                'messague' => 'Not Found.'
-            ],
-            Response::HTTP_NOT_FOUND
-        );
+        try {
+            return response()->json($this->usersInterface->update($request->all()), Response::HTTP_OK);
+        } catch (\Throwable $e) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $e->getMessage(),
+                    'file' => $e->getFile(),
+                    'line' => $e->getLine()
+                ],
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
     }
 
     /**
