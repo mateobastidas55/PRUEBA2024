@@ -14,25 +14,28 @@ class BuyLotteriesRepository implements BuyLotteriesInterface
         $res = $lotteries::where('id', $id)->first();
 
         return [
-            [
-                'package' => 'x1',
-                'description' => $res->description,
-                'price' => $res->price,
-            ],
-            [
-                'package' => 'x3',
-                'description' => $res->description,
-                'price' => $res->price * 3,
-            ],
-            [
-                'package' => 'x5',
-                'description' => $res->description,
-                'price' => $res->price * 5,
-            ],
-            [
-                'package' => 'x10',
-                'description' => $res->description,
-                'price' => $res->price * 10,
+            'message' => $res->lottery_name,
+            'info' => [
+                [
+                    'package' => 'x1',
+                    'description' => $res->description,
+                    'price' => $res->price,
+                ],
+                [
+                    'package' => 'x3',
+                    'description' => $res->description,
+                    'price' => $res->price * 3,
+                ],
+                [
+                    'package' => 'x5',
+                    'description' => $res->description,
+                    'price' => $res->price * 5,
+                ],
+                [
+                    'package' => 'x10',
+                    'description' => $res->description,
+                    'price' => $res->price * 10,
+                ]
             ]
         ];
         return new class {};
