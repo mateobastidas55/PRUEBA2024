@@ -7,7 +7,7 @@ use App\Repositories\Interfaces\LotteriesInterfaces\BuyLotteriesInterface;
 
 class BuyLotteriesRepository implements BuyLotteriesInterface
 {
-    public function show(string $id): array
+    public function show(int $id): array
     {
         $lotteries = new Lottery();
 
@@ -38,10 +38,9 @@ class BuyLotteriesRepository implements BuyLotteriesInterface
                 ]
             ]
         ];
-        return new class {};
     }
 
-    public function update(string $id, array $request): object
+    public function update(int $id, array $request): object
     {
         return new class {};
     }

@@ -23,11 +23,11 @@ class DatabaseSeeder extends Seeder
         User::factory()->create(
             [
                 'name' => 'Cristian',
-                'lastname' => 'Aguirre',
                 'birt_day' => fake()->dateTime(),
                 'id_notification_method_favorite' => 1,
                 'id_rol' => 2,
                 'email' => 'dextter1913@gmail.com',
+                'phone' => '3167777777',
                 'password' => 'Clau32290398*',
             ]
         );

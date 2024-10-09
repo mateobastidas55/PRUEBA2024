@@ -21,11 +21,11 @@ class StoreUserRequestSchema extends SchemaFactory implements Reusable
         return Schema::object('StoreUserRequest')
             ->properties(
                 Schema::string('name')->example('mauricio')->description('campo para almacenar el nombre'),
-                Schema::string('lastname')->example('gonzalez')->description('campo para almacenar el apellido'),
                 Schema::string('birthday')->example('16/07/1994')->description('campo para almacenar la fecha de nacimiento'),
                 Schema::string('notification')->example('whatsapp')->description('campo para almacenar el tipo de notificacion, whatsapp, sms, email'),
                 Schema::string('lastname')->example('usuario')->description('campo para almacenar el nombre'),
                 Schema::string('email')->example('prueba@prueba.com')->description('campo para almacenar el correo'),
+                Schema::string('phone')->example('316777777')->description('campo para almacenar el numero telefonico'),
                 Schema::string('password')->example('p4sw00rd')->description('campo para almacenar la contraseña'),
             );
     }

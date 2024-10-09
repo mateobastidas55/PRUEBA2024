@@ -9,7 +9,7 @@ interface BuyLotteriesInterface
      * @param string $id
      * @return object $response
      */
-    public function show(string $id): array;
+    public function show(int $id): array;
 
     /**
      * update buying packages
@@ -17,5 +17,5 @@ interface BuyLotteriesInterface
      * @param array $request
      * @return object $response
      */
-    public function update(string $id, array $request): object;
+    public function update(int $id, array $request): object;
 }

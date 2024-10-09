@@ -33,7 +33,7 @@ class BuyLotteriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
         try {
             $collection = $this->buyLotteriesInterface->show($id);
@@ -54,7 +54,23 @@ class BuyLotteriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id) {}
+    public function update(Request $request, string $id)
+    {
+        try {
+            $collection = $this->buyLotteriesInterface->show($id);
+            return response()->json($collection, Response::HTTP_OK);
+        } catch (\Throwable $e) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $e->getMessage(),
+                    'line' => $e->getLine(),
+                    'file' => $e->getFile()
+                ],
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
+    }
 
     /**
      * Remove the specified resource from storage.
