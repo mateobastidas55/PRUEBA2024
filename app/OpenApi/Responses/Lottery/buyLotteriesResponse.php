@@ -11,22 +11,14 @@ class buyLotteriesResponse extends ResponseFactory
 {
     public function build(): Response
     {
+
         return Response::ok()->description('Successful response')
             ->content(
                 MediaType::json()->schema(
                     Schema::object('Login')
                         ->properties(
-                            Schema::string('message')->example('Lotería de Cundinamarca')->description('Nombre de la lotería o mensaje principal de la respuesta.'),
-                            Schema::array('info')
-                                ->items(
-                                    Schema::object()->properties(
-                                        Schema::string('package')->example('x3')->description('Tipo de paquete de la lotería.'),
-                                        Schema::number('price')->example(78954)->description('Precio del paquete.')
-                                    )
-                                )
-                                ->description('Lista de paquetes disponibles para la lotería.'),
-
-
+                            Schema::boolean('success')->example('true')->description('Indica si la solicitud fue exitosa.'),
+                            Schema::array('lotteries')->example(["0001", "0002", "0003"])->description(' Un array que contiene los identificadores únicos de las loterías disponibles.'),
                         )
                 )
             );
