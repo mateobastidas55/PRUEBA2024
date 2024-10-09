@@ -2,6 +2,7 @@
 
 namespace App\Repositories\App\LotteriesRepositories;
 
+use App\Models\GamesLottery;
 use App\Models\Lottery;
 use App\Repositories\Interfaces\LotteriesInterfaces\BuyLotteriesInterface;
 
@@ -42,6 +43,44 @@ class BuyLotteriesRepository implements BuyLotteriesInterface
 
     public function update(int $id, array $request): object
     {
+        $gamesLottery = new GamesLottery();
+        switch ($request['package']) {
+            case 'x1':
+                $first = $gamesLottery::where('id_lottery', $id)
+                    ->where('id_user', '=', null)
+                    ->first();
+                $first->update(
+                    [
+                        'id_user' => $request['info']['id']
+                    ]
+                );
+                break;
+            case 'x3':
+                $count = [1, 2, 3];
+                foreach ($count as $i) {
+                    $first = $gamesLottery::where('id_lottery', $id)
+                        ->where('id_user', '=', null)
+                        ->first();
+                    $first->update(
+                        [
+                            'id_user' => $request['info']['id']
+                        ]
+                    );
+                    $res[] = $first;
+                }
+                dd($res);
+
+                break;
+            case 'x5':
+                # code...
+                break;
+            case 'x10':
+                # code...
+                break;
+            default:
+                # code...
+                break;
+        }
         return new class {};
     }
 }

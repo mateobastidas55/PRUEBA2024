@@ -31,6 +31,17 @@ class DatabaseSeeder extends Seeder
                 'password' => 'Clau32290398*',
             ]
         );
+        User::factory()->create(
+            [
+                'name' => 'mauricio',
+                'birt_day' => fake()->dateTime(),
+                'id_notification_method_favorite' => 1,
+                'id_rol' => 1,
+                'email' => 'alt.d9-elna7yd@yopmail.com',
+                'phone' => '3151511423',
+                'password' => 'password',
+            ]
+        );
 
         /**
          * seeder lottery
@@ -125,7 +136,8 @@ class DatabaseSeeder extends Seeder
                 'id_lottery' =>  $idLotery['id'],
                 'game_date' => fake()->dateTimeBetween('now', '+1 month')->format('Y-m-d'),
                 'reward' => fake()->numberBetween(1000000000, 99000000000),
-                'id_user' => fake()->randomElement($ids)
+                // 'id_user' => fake()->randomElement($ids),
+                'id_user' => NULL
             ]);
         }
 

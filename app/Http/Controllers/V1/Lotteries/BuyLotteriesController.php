@@ -20,12 +20,12 @@ class BuyLotteriesController extends Controller
         $this->buyLotteriesInterface = $buyLotteriesInterface;
     }
 
-     /**
+    /**
      * Endpoint que muestra la compra de la loteeria 
      */
     #[OpenApi\Operation(id: 'IndexBuyLotteriesMethodResponse', tags: ['comprarLoteria'], security: loginSecurityScheme::class)]
     #[OpenApi\Response(factory: buyLotteriesResponse::class, statusCode: Response::HTTP_CREATED)]
-    
+
     public function index()
     {
         //
@@ -66,7 +66,7 @@ class BuyLotteriesController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $collection = $this->buyLotteriesInterface->show($id);
+            $collection = $this->buyLotteriesInterface->update($id, $request->all());
             return response()->json($collection, Response::HTTP_OK);
         } catch (\Throwable $e) {
             return response()->json(

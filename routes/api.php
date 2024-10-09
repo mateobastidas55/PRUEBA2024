@@ -61,5 +61,8 @@ Route::group(['middleware' => 'loteria.middle', 'prefix' => 'v1'], function () {
 Route::get('/email/verify/{id}/{hash}', function ($request) {
 
     User::where('id', intval($request))->update(['email_verified_at' => Carbon::now()]);
-    return response()->json(['message' => 'Email verified successfully.']);
+    return response()->json([
+        'success' => true,
+        'message' => 'Email verified successfully.'
+    ]);
 })->middleware(['signed'])->name('verification.verify');

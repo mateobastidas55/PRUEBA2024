@@ -17,8 +17,7 @@ return new class extends Migration
             $table->foreign('id_lottery')->references('id')->on('lottery');
             $table->dateTime('game_date')->comment('campo que almacena la fecha de juego');
             $table->bigInteger('reward')->comment('campo que almacena la recompensa del premio');
-            $table->unsignedBigInteger('id_user')->comment('campo que almacena el id del ganador');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->bigInteger('id_user')->nullable()->comment('campo que almacena el id del ganador');
             $table->timestamps();
         });
     }
