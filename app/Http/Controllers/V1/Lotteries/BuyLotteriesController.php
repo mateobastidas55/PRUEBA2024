@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\V1\Lotteries;
 
 use App\Http\Controllers\Controller;
+use App\OpenApi\Responses\Lottery\buyLotteriesResponse;
 use App\Repositories\Interfaces\LotteriesInterfaces\BuyLotteriesInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
+use App\OpenApi\SecuritySchemes\auth\loginSecurityScheme;
+
+#[OpenApi\PathItem]
 class BuyLotteriesController extends Controller
 {
     private $buyLotteriesInterface;
@@ -14,9 +19,13 @@ class BuyLotteriesController extends Controller
     {
         $this->buyLotteriesInterface = $buyLotteriesInterface;
     }
-    /**
-     * Display a listing of the resource.
+
+     /**
+     * Endpoint que muestra la compra de la loteeria 
      */
+    #[OpenApi\Operation(id: 'IndexBuyLotteriesMethodResponse', tags: ['comprarLoteria'], security: loginSecurityScheme::class)]
+    #[OpenApi\Response(factory: buyLotteriesResponse::class, statusCode: Response::HTTP_CREATED)]
+    
     public function index()
     {
         //
