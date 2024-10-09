@@ -22,7 +22,7 @@ class BuyLotteriesController extends Controller
     }
 
     /**
-     * Endpoint que muestra la compra realizada de la lotería
+     * Endpoint que realiza la compra de la lotería
      */
     #[OpenApi\Operation(id: 'IndexBuyLotteriesMethodResponse', tags: ['comprarLoteria'], security: loginSecurityScheme::class)]
     #[OpenApi\RequestBody(factory: buyLotteryRequestBody::class)]
