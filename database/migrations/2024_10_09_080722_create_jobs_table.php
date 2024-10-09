@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedInteger('available_at');
             $table->unsignedInteger('created_at');
         });
+        
     }
 
     /**
