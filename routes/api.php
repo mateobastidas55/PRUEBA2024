@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\V1\Admin\AdminController;
 use App\Http\Controllers\V1\Auth\AuthController;
 use App\Http\Controllers\V1\Lotteries\BuyLotteriesController;
 use App\Http\Controllers\V1\Lotteries\LotteryController;
@@ -56,6 +57,15 @@ Route::group(['middleware' => 'loteria.middle', 'prefix' => 'v1'], function () {
      * comprar loterias
      */
     Route::apiResource('buy-lotteries', BuyLotteriesController::class);
+
+
+
+    Route::group(['middleware' => 'admin.middle'], function () {
+        /**
+         * endpoints de rutas que solo tiene acceso el admin
+         */
+        Route::apiResource('admin-route', AdminController::class);
+    });
 });
 
 

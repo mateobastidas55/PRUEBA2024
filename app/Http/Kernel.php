@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         // 'internal.user.ave' => \App\Http\Middleware\TokenAveAdminMiddleware::class,
         'loteria.middle' => \App\Http\Middleware\WebhookMiddleware::class,
+        'admin.middle' => \App\Http\Middleware\AdminMiddleware::class,
     ];
 }
