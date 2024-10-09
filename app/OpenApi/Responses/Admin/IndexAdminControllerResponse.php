@@ -13,15 +13,17 @@ class IndexAdminControllerResponse extends ResponseFactory
     {
 
         return Response::ok()->description('Successful response')
-            ->content(
-                MediaType::json()->schema(
-                    Schema::array('IndexAdminControllerResponse') 
-                        ->items( // Describe las propiedades de cada objeto del array
+    ->content(
+        MediaType::json()->schema(
+            Schema::object('IndexAdminControllerResponse')
+                ->properties(
+                    Schema::array('data') // Aseguramos que data sea un array
+                        ->items(
                             Schema::object()
                                 ->properties(
                                     Schema::string('id')
                                         ->example('00001')
-                                        ->description('Identificador único del registro de la lotería.'),
+                                        ->description('Identificador único del registro del sorteo.'),
                                     Schema::integer('loteryId')
                                         ->example(1)
                                         ->description('Identificador de la lotería a la que corresponde este sorteo.'),
@@ -47,6 +49,8 @@ class IndexAdminControllerResponse extends ResponseFactory
                                 )
                         )
                 )
-            );
+        )
+    );
+
     }
 }
