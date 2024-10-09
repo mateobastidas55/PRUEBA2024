@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V1\Lotteries;
 use App\Http\Controllers\Controller;
 use App\OpenApi\RequestBodies\buyLottery\buyLotteryRequestBody;
 use App\OpenApi\Responses\Lottery\buyLotteriesResponse;
+use App\OpenApi\Responses\Lottery\indexGanadoresPorLoteriaResponse;
 use App\OpenApi\Responses\Lottery\showLotteriesPorLoteResponse;
 use App\Repositories\Interfaces\LotteriesInterfaces\BuyLotteriesInterface;
 use Illuminate\Http\Request;
@@ -22,8 +23,13 @@ class BuyLotteriesController extends Controller
         $this->buyLotteriesInterface = $buyLotteriesInterface;
     }
 
-    
 
+    /**
+     * Números ganadores de las Loterias.
+     * Devuelve información detallada del número ganador y los premios obtenidos por cada lotería.
+     */
+    #[OpenApi\Operation(id: 'indexGanadoresPorLoteriaResponse', tags: ['Ganadores por Loteria'], security: loginSecurityScheme::class)]
+    #[OpenApi\Response(factory: indexGanadoresPorLoteriaResponse::class, statusCode: Response::HTTP_CREATED)]
     public function index()
     {
         try {
@@ -54,12 +60,13 @@ class BuyLotteriesController extends Controller
      * Display the specified resource.
      */
 
-     /**
-     * Endpoint que muestra con parametro, muestra los lotes
+    /**
+     * El endpoint devuelve información de boletos por Loteria.
+     * Devuelve varios paquetes de boletos con sus precios según la cantidad de boletos seleccionada.
      */
-    #[OpenApi\Operation(id: 'showLotteriesPorLoteResponse', tags: ['comprarLoteria'], security: loginSecurityScheme::class)]
+    #[OpenApi\Operation(id: 'showLotteriesPorLoteResponse', tags: ['Consultar paquetes de boletos por Loteria'], security: loginSecurityScheme::class)]
     #[OpenApi\Response(factory: showLotteriesPorLoteResponse::class, statusCode: Response::HTTP_CREATED)]
-        public function show(int $id)
+    public function show(int $id)
     {
         try {
             $collection = $this->buyLotteriesInterface->show($id);
@@ -76,10 +83,12 @@ class BuyLotteriesController extends Controller
             );
         }
     }
-     /**
-     * Endpoint que realiza la compra de la lotería
+    /**
+     * Endpoint que procesa la compra de boletos de lotería.
+     * Permite al usuario adquirir paquetes de boletos seleccionados.
+     * {buy_lottery} = id de la lotería
      */
-    #[OpenApi\Operation(id: 'updateBuyLotteriesMethodResponse', tags: ['comprarLoteria'], security: loginSecurityScheme::class)]
+    #[OpenApi\Operation(id: 'updateBuyLotteriesMethodResponse', tags: ['Realizar compra'], security: loginSecurityScheme::class)]
     #[OpenApi\Response(factory: buyLotteriesResponse::class, statusCode: Response::HTTP_CREATED)]
     #[OpenApi\RequestBody(factory: buyLotteryRequestBody::class)]
     public function update(Request $request, string $id)

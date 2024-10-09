@@ -12,7 +12,7 @@ class buyLotteryRequestBody extends RequestBodyFactory
     public function build(): RequestBody
     {
         return RequestBody::create('buyLotteryRequestBody')
-            ->description('crear la compra de una loteria')
+            ->description('Generar la compra de boletos de lotería')
             ->content(
                 MediaType::json()->schema(buyLoterrySchema::ref())
             );

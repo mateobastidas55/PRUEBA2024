@@ -25,9 +25,11 @@ class LotteryController extends Controller
 
 
     /**
-     * Endpoint que muestra las loterias
-     */
-    #[OpenApi\Operation(id: 'IndexLotteriesResponse', tags: ['loterias'], security: loginSecurityScheme::class)]
+ * Endpoint que proporciona una lista de las loterías disponibles.
+ * Devuelve información sobre cada lotería, como su nombre, descripción, y estado actual.
+ */
+
+    #[OpenApi\Operation(id: 'IndexLotteriesResponse', tags: ['Consultar Loterías'], security: loginSecurityScheme::class)]
     #[OpenApi\Response(factory: LotteryResponse::class, statusCode: Response::HTTP_CREATED)]
     public function index()
     {
