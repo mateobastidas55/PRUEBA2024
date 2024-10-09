@@ -5,6 +5,8 @@ namespace App\Http\Controllers\V1\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\GamesLottery;
 use App\Models\Lottery;
+use App\Models\Rol;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -58,7 +60,35 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $users = User::get()->toArray();
+
+            foreach ($users as $user) {
+                $res[] = [
+                    "id" => $user['id'],
+                    "name" => $user['name'],
+                    "email" => $user['email'],
+                    "birthDate" => $user['birt_day'],
+                    "status" => 1,
+                    "phone" => $user['phone'],
+                    "notifyBy" => $user['id_notification_method_favorite'],
+                    "role" => Rol::where('id', $user['id_rol'])->select('id', 'rol_name As name')->get()->first(),
+                    "createdAt" => $user['created_at'],
+                    "updatedAt" => $user['updated_at']
+                ];
+            }
+            return response()->json(['data' => $res], Response::HTTP_OK);
+        } catch (\Throwable $e) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $e->getMessage(),
+                    'line' => $e->getLine(),
+                    'file' => $e->getFile()
+                ],
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
     }
 
     /**
