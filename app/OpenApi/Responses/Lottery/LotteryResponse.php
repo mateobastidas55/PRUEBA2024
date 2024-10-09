@@ -21,7 +21,7 @@ class LotteryResponse extends ResponseFactory
                             Schema::string('description')->example('Una de las loterías más antiguas y tradicionales del país.')->description('Descripción detallada de la lotería. Proporciona información sobre la historia y características de la lotería.'),
                             Schema::boolean('status')->example(1)->description('Estado de la lotería, donde 1 indica que está activa. Este campo puede ser utilizado para determinar si la lotería está en funcionamiento.'),
                             Schema::string('gameRules')->example('Juega con las tres últimas cifras en su orden correcta.')->description('Reglas del juego de la lotería. Explica cómo se puede participar y cuáles son los requisitos para jugar.'),
-
+                            Schema::string('price')->example('20000 COP')->description('campo que almacena el precio de la loteria'),
                         )
                 )
             );

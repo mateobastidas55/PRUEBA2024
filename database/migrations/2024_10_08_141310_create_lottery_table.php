@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description')->comment('campo que almacena la descripcion de la loteria');
             $table->boolean('status')->comment('campo que almacena el estado de la loteria');
             $table->string('game_rules')->comment('campo que almacena las reglas de juego de la loteria');
+            $table->integer('price')->comment('campo que almacena el precio de la loteria');
             $table->timestamps();
         });
     }

@@ -19,7 +19,8 @@ class LotteryResource extends JsonResource
             'lotteryName' => $this->lottery_name,
             'description' => $this->description,
             'status' => $this->status,
-            'gameRules' => $this->game_rules
+            'gameRules' => $this->game_rules,
+            'price' => (string)$this->price.' COP'
         ];
     }
 }

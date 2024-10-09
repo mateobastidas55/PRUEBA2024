@@ -13,7 +13,8 @@ class Lottery extends Model
         'lottery_name',
         'description',
         'status',
-        'game_rules'
+        'game_rules',
+        'price'
     ];
 
     protected $table = 'lottery';

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\V1\Auth\AuthController;
+use App\Http\Controllers\V1\Lotteries\BuyLotteriesController;
 use App\Http\Controllers\V1\Lotteries\LotteryController;
 use App\Http\Controllers\V1\Notification\NotificationMethodsController;
 use App\Http\Controllers\V1\Users\UsersController;
@@ -28,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('create-user', [UsersController::class, 'store'])->name('create.user');
 
-Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'login'])->name('login');
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
@@ -46,6 +47,12 @@ Route::group(['middleware' => 'loteria.middle', 'prefix' => 'v1'], function () {
      * todas las loterias
      */
     Route::apiResource('lotteries', LotteryController::class);
+
+
+    /**
+     * comprar loterias
+     */
+    Route::apiResource('buy-lotteries', BuyLotteriesController::class);
 });
 
 

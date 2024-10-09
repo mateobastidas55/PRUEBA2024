@@ -109,7 +109,8 @@ class DatabaseSeeder extends Seeder
                     'lottery_name' => $lotteryName,
                     'description' => $descriptions[$lotteryName],
                     'status' => fake()->randomElement($status),
-                    'game_rules' => $gameRules[$lotteryName]
+                    'game_rules' => $gameRules[$lotteryName],
+                    'price' => fake()->numberBetween(20000, 100000)
                 ]
             )->getAttributes();
         }
