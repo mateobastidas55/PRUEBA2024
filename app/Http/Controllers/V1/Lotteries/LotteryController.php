@@ -35,7 +35,7 @@ class LotteryController extends Controller
     {
         try {
             $collection = $this->lotteryInterface->index();
-            return response()->json(LotteryResource::collection($collection), Response::HTTP_OK);
+            return response()->json(['data' => LotteryResource::collection($collection)], Response::HTTP_OK);
         } catch (\Throwable $e) {
             return response()->json(
                 [
