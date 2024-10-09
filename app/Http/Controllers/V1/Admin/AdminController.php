@@ -31,7 +31,7 @@ class AdminController extends Controller
                     "updatedAt" => $gameLottery['updated_at'],
                 ];
             }
-            return response()->json($res, Response::HTTP_OK);
+            return response()->json(['data' => $res], Response::HTTP_OK);
         } catch (\Throwable $e) {
             return response()->json(
                 [
