@@ -21,11 +21,11 @@ class UserRepository implements UserInterface
         // dd($request);
         $fillable = [
             'name' => $request['name'],
-            'lastname' => $request['lastname'],
             'birt_day' => Carbon::createFromFormat('d/m/Y', $request['birthday'])->format('Y-m-d'),
             'id_notification_method_favorite' => $idMethodNotification::where('notification_method_name', $request['notification'])->first()->id,
             'id_rol' => 1,
             'email' => $request['email'],
+            'phone' => $request['phone'],
             'password' => Hash::make($request['password']),
         ];
         $user = User::create($fillable);
