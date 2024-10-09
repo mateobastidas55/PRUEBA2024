@@ -30,7 +30,20 @@ class BuyLotteriesController extends Controller
 
     public function index()
     {
-        //
+        try {
+            $collection = $this->buyLotteriesInterface->index();
+            return response()->json($collection, Response::HTTP_OK);
+        } catch (\Throwable $e) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $e->getMessage(),
+                    'line' => $e->getLine(),
+                    'file' => $e->getFile()
+                ],
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
     }
 
     /**

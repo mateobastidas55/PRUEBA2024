@@ -4,6 +4,13 @@ namespace App\Repositories\Interfaces\LotteriesInterfaces;
 
 interface BuyLotteriesInterface
 {
+
+    /**
+     * get all winners
+     * @return object $response
+     */
+    public function index(): array;
+
     /**
      * get all packages
      * @param string $id
