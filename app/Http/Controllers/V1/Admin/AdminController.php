@@ -14,6 +14,7 @@ use Illuminate\Http\Response;
 use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
 use App\OpenApi\SecuritySchemes\auth\loginSecurityScheme;
 use App\OpenApi\Responses\Admin\IndexAdminControllerResponse;
+use App\OpenApi\Responses\Admin\showAdminControllerResponse;
 
 #[OpenApi\PathItem]
 
@@ -66,10 +67,15 @@ class AdminController extends Controller
     {
         //
     }
-
+    
     /**
-     * Display the specified resource.
+     * Endpoint que proporciona una lista de todos los Usuarios.
+     * Devuelve información sobre cada Usuario.
      */
+
+     #[OpenApi\Operation(id: 'showAdminControllerResponse', tags: ['Consultar Usuarios'], security: loginSecurityScheme::class)]
+     #[OpenApi\Response(factory: showAdminControllerResponse::class, statusCode: Response::HTTP_CREATED)]
+     
     public function show(string $id)
     {
         try {
