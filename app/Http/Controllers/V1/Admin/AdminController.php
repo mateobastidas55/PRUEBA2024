@@ -21,7 +21,7 @@ class AdminController extends Controller
             foreach ($gamesLotteries as $gameLottery) {
                 $price = $loteries::where('id', $gameLottery['id_lottery'])->get()->first()->toArray();
                 $res[] = [
-                    "id" => $gameLottery['id'],
+                    "id" => str_pad($gameLottery['id'], 5, '0', STR_PAD_LEFT),
                     "loteryId" => $gameLottery['id_lottery'],
                     "gameDate" => $gameLottery['game_date'],
                     "totalPrize" => $price['price'],
@@ -33,7 +33,15 @@ class AdminController extends Controller
             }
             return response()->json($res, Response::HTTP_OK);
         } catch (\Throwable $e) {
-            # code...
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $e->getMessage(),
+                    'line' => $e->getLine(),
+                    'file' => $e->getFile()
+                ],
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
         }
     }
 
