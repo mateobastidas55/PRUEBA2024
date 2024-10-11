@@ -36,7 +36,7 @@ class RunGameCommand extends Command
         }
         foreach ($winnersId as $winnerId) {
             $gamesLotteries::where('id', $winnerId['id'])->update(['winner' => true]);
-            Mail::to('pmanager@aveonline.com')->send(new WinnerMail($winnerId['id']));
+            Mail::to('pmanager@aveonline.co')->send(new WinnerMail($winnerId['id']));
         }
         echo 'congratulations to the winners';
     }
