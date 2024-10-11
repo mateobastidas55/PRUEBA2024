@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:run-game-command')->hourly();
+        $schedule->command('app:run-game-command')->cron('*/5 * * * *');
     }
 
     /**
